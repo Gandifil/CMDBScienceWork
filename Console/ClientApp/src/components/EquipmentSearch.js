@@ -1,8 +1,7 @@
 ﻿import React, { Component } from 'react';
 import SearchField from "react-search-field";
-import Modal from 'react-awesome-modal';
-import { Button } from 'reactstrap';
-import { CreateEquipment } from './Modals/CreateEquipment';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { CreateEquipment } from './Modals/CreateEquipment'; 
 
 export class EquipmentSearch extends Component {
     static displayName = EquipmentSearch.name;
@@ -11,6 +10,7 @@ export class EquipmentSearch extends Component {
         super(props);
         this.state = { equipments:[], loading: true, modalVisible: false};
         this.search = this.search.bind(this)
+        this.modal = React.createRef();
     }
 
     componentDidMount() {
@@ -57,18 +57,8 @@ export class EquipmentSearch extends Component {
                     onSearchClick={this.search}
                     onBlur={this.search}
                 />
+                <CreateEquipment ref={this.modal} />
                 <Button variant="outline-primary" onClick={() => this.openModal()}>Добавить</Button>
-                <Modal
-                    visible={this.state.modalVisible}
-                    width="400"
-                    height="300"    
-                    effect="fadeInUp"
-                    onClickAway={() => this.closeModal()}>
-                    <div>
-                        <CreateEquipment />
-                        <a href="javascript:void(0);" onClick={() => this.closeModal()}>Close</a>
-                    </div>
-                </Modal>
                 { contents }
             </div>
         );
@@ -80,8 +70,7 @@ export class EquipmentSearch extends Component {
     }
 
     async openModal() {
-        this.state.modalVisible = true
-        this.setState(this.state)
+        this.modal.current.show()
     }
 
     async populateData(value) {
