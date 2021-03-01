@@ -18,7 +18,7 @@ export class CreateEquipment extends Component {
     }
 
     setCost(value) {
-        this.setState({ item: {name: this.state.item.name, cost: value } })
+        this.setState({ item: {name: this.state.item.name, cost: parseInt(value) } })
     }
 
     show() {
@@ -26,15 +26,24 @@ export class CreateEquipment extends Component {
     }
 
     hide() {
+        this.props.onHide()
         this.setState({ visible: false })
     }
 
-    toggle() {
-        this.setState({ visible: !this.state.visible })
+    async createEquipment() {
+        const response = await fetch('equipment', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(this.state.item)
+        });
+        const data = await response.json();
     }
 
     async submit() {
         console.log("Creating equipment", this.state.item)
+        await this.createEquipment()
         this.hide();
     }
 

@@ -27,5 +27,13 @@ namespace Console.Controllers
                 equips = equips.Where(e => e.Name.IndexOf(name) >= 0);
            return equips.Take(10);
         }
+
+        [HttpPost]
+        public IActionResult Post([FromBody] Equipment item)
+        {
+            _context.Equipments.Add(item);
+            _context.SaveChanges();
+            return Ok();
+        }
     }
 }

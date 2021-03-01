@@ -57,7 +57,7 @@ export class EquipmentSearch extends Component {
                     onSearchClick={this.search}
                     onBlur={this.search}
                 />
-                <CreateEquipment ref={this.modal} />
+                <CreateEquipment ref={this.modal} onHide={ this.search } />
                 <Button variant="outline-primary" onClick={() => this.openModal()}>Добавить</Button>
                 { contents }
             </div>
