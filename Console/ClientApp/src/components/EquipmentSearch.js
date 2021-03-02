@@ -1,7 +1,8 @@
 ﻿import React, { Component } from 'react';
 import SearchField from "react-search-field";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { CreateEquipment } from './Modals/CreateEquipment'; 
+import { CreateEquipment } from './Modals/CreateEquipment';
+import { EquipmentRow } from './Rows/EquipmentRow'; 
 
 export class EquipmentSearch extends Component {
     static displayName = EquipmentSearch.name;
@@ -21,33 +22,10 @@ export class EquipmentSearch extends Component {
         this.populateData(value);
     }
 
-    static renderEquipmentsTable(equipments) {
-        return (
-            <table className='table table-striped' aria-labelledby="tabelLabel">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Имя</th>
-                        <th>Цена (в руб.)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {equipments.map(equipment =>
-                        <tr key={equipment.id}>
-                            <td>{equipment.id}</td>
-                            <td>{equipment.name}</td>
-                            <td>{equipment.cost}</td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
-        );
-    }
-
     render() {
         let contents = this.state.loading
             ? <p><em>Загрузка...</em></p>
-            : EquipmentSearch.renderEquipmentsTable(this.state.equipments);
+            : EquipmentRow.table(this.state.equipments);
 
         return (
             <div>
