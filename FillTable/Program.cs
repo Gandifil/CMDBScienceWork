@@ -7,6 +7,25 @@ namespace FillTable
 {
     class Program
     {
+        static IEnumerable<CDMBObjects.Attribute> TestAttributes => new List<CDMBObjects.Attribute>()
+        {
+            new CDMBObjects.Attribute
+            {
+                Name = "Процессор",
+                Type = CDMBObjects.Attribute.ValueType.String,
+            },
+            new CDMBObjects.Attribute
+            {
+                Name = "Стоимость",
+                Type = CDMBObjects.Attribute.ValueType.Integer,
+            },
+            new CDMBObjects.Attribute
+            {
+                Name = "Операционная система",
+                Type = CDMBObjects.Attribute.ValueType.String,
+            },
+        };
+
         static IEnumerable<ParameterType> CreateTypes()
         {
             var types = new List<ParameterType>();
@@ -49,6 +68,7 @@ namespace FillTable
 
                 var types = CreateTypes();
                 db.ParameterTypes.AddRange(types);
+                db.Attributes.AddRange(TestAttributes);
 
                 for (int i = 0; i < 3; i++)
                 {

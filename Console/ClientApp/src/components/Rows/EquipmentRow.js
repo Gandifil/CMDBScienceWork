@@ -1,4 +1,5 @@
 ﻿import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 import { Button } from 'reactstrap';
 
 export class EquipmentRow extends Component {
@@ -19,6 +20,7 @@ export class EquipmentRow extends Component {
                         <th>Имя</th>
                         <th>Цена (в руб.)</th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,6 +37,7 @@ export class EquipmentRow extends Component {
                 <td>{equipment.id}</td>
                 <td>{equipment.name}</td>
                 <td>{equipment.cost}</td>
+                <td><Link to={'/equipment/' + equipment.id} className="btn btn-primary">Открыть</Link></td>
                 <td><Button color="danger">Удалить</Button></td>
             </tr>
         );

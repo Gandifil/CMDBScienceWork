@@ -1,8 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CDMBObjects
 {
@@ -10,6 +6,8 @@ namespace CDMBObjects
     {
         public DbSet<Equipment> Equipments { get; set; }
         public DbSet<ParameterType> ParameterTypes { get; set; }
+        public DbSet<Attribute> Attributes { get; set; }
+        public DbSet<AttributeValue> AttributeValues { get; set; }
 
         public ApplicationContext()
         {
