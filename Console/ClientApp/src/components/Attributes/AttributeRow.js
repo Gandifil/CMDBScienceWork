@@ -8,11 +8,12 @@ export class AttributeRow extends Component {
     }
 
     render() {
+        const typeNames = ["Строка", "Проценты", "Вещественное", "Целое"]
         const item = this.props.item;
         return (
             <tr key={item.id}>
                 <td>{item.name}</td>
-                <td>{item.type}</td>
+                <td>{typeNames[item.type]}</td>
                 <td>
                         <Button className="ml-3" outline color="warning">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
