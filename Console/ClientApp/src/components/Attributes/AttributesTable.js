@@ -13,7 +13,7 @@ export class AttributesTable extends Component {
                         <tr>
                             <th>Название</th>
                             <th>Тип</th>
-                            <th>Действие</th>
+                            <th>Действия</th>
                         </tr>
                     </thead>
                     <tbody>
