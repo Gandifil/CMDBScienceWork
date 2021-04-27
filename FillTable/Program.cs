@@ -60,10 +60,10 @@ namespace FillTable
                         var item = new Equipment
                         {
                             Hostname = name,
-                            Parameters = types.Select(x => new ParameterLink()
-                            {
-                                Type = x,
-                            }).ToList(),
+                            //Parameters = types.Select(x => new ParameterLink()
+                            //{
+                            //    Type = x,
+                            //}).ToList(),
                         };
                         db.Equipments.Add(item);
                     }
