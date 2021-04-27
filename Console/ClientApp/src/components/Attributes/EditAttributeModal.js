@@ -61,7 +61,7 @@ export class EditAttributeModal extends Component {
     <ModalBody>
         <FormGroup>
             <Label>Название</Label>
-            <Input name="tag" onChange={this.handleName} value={this.state.item.name} />
+                        <Input name="tag" bsSize="lg" onChange={this.handleName} value={this.state.item.name} />
         </FormGroup>
         <FormGroup>
             <Label>Тип</Label>
