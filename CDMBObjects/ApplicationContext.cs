@@ -5,7 +5,7 @@ namespace CDMBObjects
     public class ApplicationContext : DbContext
     {
         public DbSet<Equipment> Equipments { get; set; }
-        public DbSet<ParameterType> ParameterTypes { get; set; }
+        public DbSet<Metric> ParameterTypes { get; set; }
         public DbSet<Attribute> Attributes { get; set; }
         public DbSet<AttributeValue> AttributeValues { get; set; }
 

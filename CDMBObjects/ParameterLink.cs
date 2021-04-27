@@ -10,6 +10,6 @@ namespace CDMBObjects
         [Key]
         public int ID { get; set; }
 
-        public ParameterType Type { get; set; }
+        public Metric Type { get; set; }
     }
 }

@@ -23,8 +23,6 @@ namespace Console.Controllers
         public IEnumerable<Equipment> Get([FromQuery]string name)
         {
             IQueryable<Equipment> equips = _context.Equipments;
-            if (!string.IsNullOrEmpty(name))
-                equips = equips.Where(e => e.Name.IndexOf(name) >= 0);
            return equips.Take(10);
         }
 

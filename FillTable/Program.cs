@@ -26,36 +26,16 @@ namespace FillTable
             },
         };
 
-        static IEnumerable<ParameterType> CreateTypes()
+        static IEnumerable<Metric> CreateTypes()
         {
-            var types = new List<ParameterType>();
-            types.Add(new ParameterType()
+            var types = new List<Metric>();
+            types.Add(new Metric()
             {
-                InternalName = "OS",
-                VisibleName = "Операционная система",
-                Type = ParameterType.ValueType.String,
-                Order = 0,
-            });
-            types.Add(new ParameterType()
-            {
-                InternalName = "OS_VERSION",
-                VisibleName = "Версия операционной системы",
-                Type = ParameterType.ValueType.String,
-                Order = 1,
-            });
-            types.Add(new ParameterType()
-            {
-                InternalName = "CPU_LOAD",
-                VisibleName = "Нагрузка на CPU",
-                Type = ParameterType.ValueType.Procent,
-                Order = 5,
-            });
-            types.Add(new ParameterType()
-            {
-                InternalName = "CPU_LOAD",
-                VisibleName = "Нагрузка на CPU",
-                Type = ParameterType.ValueType.Procent,
-                Order = 5,
+                Name = "Нагрузка на CPU",
+                Plugin = "CPU_LOAD",
+                Type = CDMBObjects.Attribute.ValueType.Percent,
+                Frequency = 24 * 12,
+                HistoryDays = 3,
             }); 
             return types;
         }
@@ -79,8 +59,7 @@ namespace FillTable
                         var name = prefix + "icmdb" + postfix;
                         var item = new Equipment
                         {
-                            Name = name,
-                            Cost = 33,
+                            Hostname = name,
                             Parameters = types.Select(x => new ParameterLink()
                             {
                                 Type = x,
