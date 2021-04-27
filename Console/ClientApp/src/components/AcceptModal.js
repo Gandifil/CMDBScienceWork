@@ -44,7 +44,7 @@ export class AcceptModal extends Component {
     </ModalBody>
     <ModalFooter>
         <Button color="secondary" onClick={this.discard}>Отмена</Button>
-        <Button color="primary" onClick={this.accept}>Сохранить</Button>
+        <Button color="primary" onClick={this.accept}>Подтвердить</Button>
     </ModalFooter>
 </Modal>
         );

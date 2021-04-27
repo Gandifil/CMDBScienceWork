@@ -8,18 +8,29 @@ export class AttributeRow extends Component {
     constructor(props) {
         super(props);
 
+        this.state = { deleted: false }
+
         this.editModal = React.createRef()
         this.deleteModal = React.createRef()
 
         this.handleEditClick = (e) => this.editModal.current.show()
         this.handleDeleteClick = (e) => this.deleteModal.current.show()
 
-        this.handleDeleteAccept = (e) => console.log(e)
+        this.handleDeleteAccept = (e) => this.deleteAttribute()
+    }
+
+    deleteAttribute() {
+        fetch('api/attribute/' + this.props.item.id, { method: "DELETE" })
+            .then(response => this.setState({ deleted: true }))
+            .catch(e => console.log(e))
     }
 
     render() {
         const typeNames = ["Строка", "Проценты", "Вещественное", "Целое"]
         const item = this.props.item;
+        if (this.state.deleted)
+            return (null);
+        else
         return (
             <tr key={item.id}>
                 <td>{item.name}</td>

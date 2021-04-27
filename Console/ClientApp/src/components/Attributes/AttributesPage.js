@@ -37,6 +37,5 @@ export class AttributesPage extends Component {
         fetch('api/attributes')
             .then(response => response.json())
             .then(result => this.setState({ items: result, loading: false }))
-        ;
     }
 }
