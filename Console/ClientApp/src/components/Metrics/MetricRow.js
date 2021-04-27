@@ -39,6 +39,7 @@ export class MetricRow extends Component {
                 <td>{item.plugin}</td>
                 <td>{item.cron}</td>
                 <td>
+                    <Link to={'/metrics/' + item.id} className="btn btn-primary">Открыть</Link>
                     <EditMetricModal ref={this.editModal} item={item} onAccept={this.handleEditAccept} />
                     <AcceptModal ref={this.deleteModal} items={["Удаление метрики"]} onAccept={ this.handleDeleteAccept } />
                     <Button className="ml-2" outline color="warning" onClick={this.handleEditClick }>
