@@ -47,7 +47,7 @@ namespace FillTable
                 db.Reload();
 
                 var types = CreateTypes();
-                db.ParameterTypes.AddRange(types);
+                db.Metrics.AddRange(types);
                 db.Attributes.AddRange(TestAttributes);
 
                 for (int i = 0; i < 3; i++)

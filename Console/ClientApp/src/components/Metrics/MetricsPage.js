@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactLoading from 'react-loading';
 import { Button } from 'reactstrap';
-//import { MetricsTable } from './MetricsTable';
+import { MetricsTable } from './MetricsTable';
 //import { EditMetricModal } from './EditMetricModal';
 
 export class MetricsPage extends Component {
@@ -23,7 +23,7 @@ export class MetricsPage extends Component {
     render() {
         const contents = this.state.loading
             ? <ReactLoading type="cylon" color="black" height={667} width={375} />
-            : null//<MetricsTable items={this.state.items} />;<EditMetricModal ref={this.createModal} onAccept={this.handleCreateAccept} />
+            : <MetricsTable items={this.state.items} />;//<EditMetricModal ref={this.createModal} onAccept={this.handleCreateAccept} />
 
         return (
             <div>
@@ -33,7 +33,7 @@ export class MetricsPage extends Component {
                         <path fill-rule="evenodd" d="M11 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0 1a5 5 0 1 0 0-10 5 5 0 0 0 0 10z" />
                         <path fill-rule="evenodd" d="M11 5a.5.5 0 0 1 .5.5v2h2a.5.5 0 0 1 0 1h-2v2a.5.5 0 0 1-1 0v-2h-2a.5.5 0 0 1 0-1h2v-2A.5.5 0 0 1 11 5z" />
                     </svg>
-                    Добавить атрибут
+                    Добавить метрику
                 </Button>
                 
                 {contents}
@@ -41,11 +41,12 @@ export class MetricsPage extends Component {
             );
     }
 
-    async populateData() {
+    populateData() {
         this.setState({ items: [], loading: true });
-
-        fetch('api/Metrics')
-            .then(response => response.json())
-            .then(result => this.setState({ items: result, loading: false }))
+        
+        fetch('api/metrics')
+            .then(responce => responce.ok ? responce.json() : Promise.reject(responce))
+            .then(results => this.setState({ items: results, loading: false }))
+            .catch(e => console.log(e))
     }
 }

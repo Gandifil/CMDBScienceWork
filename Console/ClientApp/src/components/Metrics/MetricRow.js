@@ -35,7 +35,8 @@ export class MetricRow extends Component {
         return (
             <tr key={item.id}>
                 <td>{item.name}</td>
-                <td>{typeNames[item.type]}</td>
+                <td>{item.plugin}</td>
+                <td>{item.Frequency}</td>
                 <td>
                     <EditMetricModal ref={this.editModal} item={item} onAccept={this.handleEditAccept} />
                     <AcceptModal ref={this.deleteModal} items={["Удаление атрибута"]} onAccept={ this.handleDeleteAccept } />
