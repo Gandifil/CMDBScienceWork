@@ -8,7 +8,7 @@ export class AttributeRow extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { deleted: false }
+        this.state = { item: this.props.item, deleted: false }
 
         this.editModal = React.createRef()
         this.deleteModal = React.createRef()
@@ -16,6 +16,7 @@ export class AttributeRow extends Component {
         this.handleEditClick = (e) => this.editModal.current.show()
         this.handleDeleteClick = (e) => this.deleteModal.current.show()
 
+        this.handleEditAccept = (e) => this.setState({item: e.state.item, deleted: false})
         this.handleDeleteAccept = (e) => this.deleteAttribute()
     }
 
@@ -27,7 +28,7 @@ export class AttributeRow extends Component {
 
     render() {
         const typeNames = ["Строка", "Проценты", "Вещественное", "Целое"]
-        const item = this.props.item;
+        const item = this.state.item;
         if (this.state.deleted)
             return (null);
         else
@@ -36,7 +37,7 @@ export class AttributeRow extends Component {
                 <td>{item.name}</td>
                 <td>{typeNames[item.type]}</td>
                 <td>
-                    <EditAttributeModal ref={this.editModal} item={item} />
+                    <EditAttributeModal ref={this.editModal} item={item} onAccept={this.handleEditAccept} />
                     <AcceptModal ref={this.deleteModal} items={["Удаление атрибута"]} onAccept={ this.handleDeleteAccept } />
                     <Button className="ml-2" outline color="warning" onClick={this.handleEditClick }>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil" viewBox="0 0 16 16">

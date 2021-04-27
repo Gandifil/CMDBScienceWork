@@ -28,7 +28,7 @@ export class EditAttributeModal extends Component {
     }
 
     handleType(e) {
-        this.state.item.type = e.currentTarget.value;
+        this.state.item.type = parseInt(e.currentTarget.value);
         this.setState(this.state);
     }
 
@@ -46,6 +46,16 @@ export class EditAttributeModal extends Component {
         if (this.state.index == -1)
             return;
         console.log("Сохранить", this.state.item);
+        fetch("api/attribute/" + this.state.item.id, {
+            method: "PUT",
+            body: JSON.stringify(this.state.item),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(responce => responce.ok ? responce : Promise.reject(responce))
+            .then(responce => this.props.onAccept(this))
+            .catch(e => console.log(e))
         this.hide();
     }
 
