@@ -3,6 +3,7 @@ import ReactLoading from 'react-loading';
 import { Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { MetricsTable } from './MetricsTable';
+import { ValueTypeField } from '../ValueTypeField';
 //import { EditMetricModal } from './EditMetricModal';
 
 export class MetricPage extends Component {
@@ -11,12 +12,19 @@ export class MetricPage extends Component {
         this.state = { item: null, loading: true };
 
         this.handleName = this.setName.bind(this)
+        this.handleType = this.setType.bind(this)
         this.handlePlugin = this.setPlugin.bind(this)
         this.handleCron = this.setCron.bind(this)
+        this.handleHistory = this.setHistory.bind(this)
     }
 
     setName(e) {
         this.state.item.name = e.target.value
+        this.setState(this.state)
+    }
+
+    setType(e) {
+        this.state.item.type = parseInt(e.currentTarget.value);
         this.setState(this.state)
     }
 
@@ -30,6 +38,11 @@ export class MetricPage extends Component {
         this.setState(this.state)
     }
 
+    setHistory(e) {
+        this.state.item.historyDays = e.target.value
+        this.setState(this.state)
+    }
+
     componentDidMount() {
         this.populateData();
     }
@@ -39,8 +52,10 @@ export class MetricPage extends Component {
         return (
             <AvForm>
                 <AvField label="Наименование" name="name" bsSize="lg" onChange={this.handleName} value={item.name} required />
+                <ValueTypeField onChange={this.handleType} value={item.type} required />
                 <AvField label="Плагин" name="name" bsSize="lg" onChange={this.handlePlugin} value={item.plugin} required />
                 <AvField label="Cron-расписание" name="name" bsSize="lg" onChange={this.handleCron} value={item.cron} required />
+                <AvField label="История храниться в течении (д.)" name="maxPropString" bsSize="lg" onChange={this.handleHistory} value={item.historyDays} type="number" min="1" max="30" required />
             </AvForm >
         )
     } 
