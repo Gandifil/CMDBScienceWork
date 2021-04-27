@@ -34,7 +34,7 @@ export class AttributesPage extends Component {
     async populateData() {
         this.setState({ items: [], loading: true });
 
-        fetch('attributes')
+        fetch('api/attributes')
             .then(response => response.json())
             .then(result => this.setState({ items: result, loading: false }))
         ;

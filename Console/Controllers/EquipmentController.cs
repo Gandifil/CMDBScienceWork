@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 namespace Console.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class AttributesController : ControllerBase
     {
         private readonly ApplicationContext context;
