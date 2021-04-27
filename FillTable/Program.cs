@@ -34,7 +34,7 @@ namespace FillTable
                 Name = "Нагрузка на CPU",
                 Plugin = "CPU_LOAD",
                 Type = CDMBObjects.Attribute.ValueType.Percent,
-                Frequency = 24 * 12,
+                Cron = "* */5 * * ? * *",
                 HistoryDays = 3,
             }); 
             return types;

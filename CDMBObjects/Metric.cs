@@ -9,7 +9,7 @@ namespace CDMBObjects
         public Attribute.ValueType Type { get; set; }
         public string Name { get; set; }
         public string Plugin { get; set; }
-        public uint Frequency { get; set; }
+        public string Cron { get; set; }
         public uint HistoryDays { get; set; }
     }
 }
