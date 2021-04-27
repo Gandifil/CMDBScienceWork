@@ -19,6 +19,12 @@ namespace Console.Controllers
             this.context = context;
         }
 
+        [HttpGet("{id:int:min(0)}")]
+        public async Task<Metric> Get([FromRoute] int id)
+        {
+            return await context.Metrics.FindAsync(id);
+        }
+
         public IEnumerable<Metric> Get()
         {
            return context.Metrics;
