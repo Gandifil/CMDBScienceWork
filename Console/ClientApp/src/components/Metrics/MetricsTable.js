@@ -13,7 +13,7 @@ export class MetricsTable extends Component {
                     <tr>
                         <th>Название</th>
                         <th>Плагин</th>
-                        <th>Частота</th>
+                        <th>Расписание</th>
                         <th>Действия</th>
                     </tr>
                 </thead>
