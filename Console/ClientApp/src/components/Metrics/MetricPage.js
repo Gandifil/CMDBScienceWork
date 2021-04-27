@@ -11,10 +11,22 @@ export class MetricPage extends Component {
         this.state = { item: null, loading: true };
 
         this.handleName = this.setName.bind(this)
+        this.handlePlugin = this.setPlugin.bind(this)
+        this.handleCron = this.setCron.bind(this)
     }
 
     setName(e) {
         this.state.item.name = e.target.value
+        this.setState(this.state)
+    }
+
+    setPlugin(e) {
+        this.state.item.plugin = e.target.value
+        this.setState(this.state)
+    }
+
+    setCron(e) {
+        this.state.item.cron = e.target.value
         this.setState(this.state)
     }
 
@@ -27,6 +39,8 @@ export class MetricPage extends Component {
         return (
             <AvForm>
                 <AvField label="Наименование" name="name" bsSize="lg" onChange={this.handleName} value={item.name} required />
+                <AvField label="Плагин" name="name" bsSize="lg" onChange={this.handlePlugin} value={item.plugin} required />
+                <AvField label="Cron-расписание" name="name" bsSize="lg" onChange={this.handleCron} value={item.cron} required />
             </AvForm >
         )
     } 
