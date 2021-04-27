@@ -19,9 +19,13 @@ namespace Console.Controllers
             this.context = context;
         }
 
-        public IEnumerable<CDMBObjects.Attribute> Post([FromBody] CDMBObjects.Attribute attribute)
+        public async Task<IActionResult> Post([FromBody] CDMBObjects.Attribute attribute)
         {
-            return context.Attributes;
+            context.Attributes.Add(attribute);
+            var changes = await context.SaveChangesAsync();
+            if (changes > 0)
+                return Ok();
+            else return NotFound();
         }
 
         [HttpPut("{id:int:min(0)}")]
