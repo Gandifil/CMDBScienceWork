@@ -10,19 +10,30 @@ namespace Console.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AttributesController : ControllerBase
+    public class EquipmentController : ControllerBase
     {
-        private readonly ApplicationContext context;
+        private readonly ApplicationContext _context;
 
-        public AttributesController(ApplicationContext context)
+        public EquipmentController(ApplicationContext context)
         {
-            this.context = context;
+            _context = context;
         }
 
         [HttpGet]
-        public IEnumerable<CDMBObjects.Attribute> Get()
+        public IEnumerable<Equipment> Get([FromQuery]string name)
         {
-           return context.Attributes;
+            IQueryable<Equipment> equips = _context.Equipments;
+            if (!string.IsNullOrEmpty(name))
+                equips = equips.Where(e => e.Name.IndexOf(name) >= 0);
+           return equips.Take(10);
+        }
+
+        [HttpPost]
+        public IActionResult Post([FromBody] Equipment item)
+        {
+            _context.Equipments.Add(item);
+            _context.SaveChanges();
+            return Ok();
         }
     }
 }
