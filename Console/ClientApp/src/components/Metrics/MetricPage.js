@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import ReactLoading from 'react-loading';
-import { Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
-import { MetricsTable } from './MetricsTable';
 import { ValueTypeField } from '../ValueTypeField';
+import { Button, Label, ModalHeader} from 'reactstrap';
 //import { EditMetricModal } from './EditMetricModal';
 
 export class MetricPage extends Component {
@@ -51,6 +50,7 @@ export class MetricPage extends Component {
         const item = this.state.item;
         return (
             <AvForm>
+                <ModalHeader>Метрика</ModalHeader>
                 <AvField label="Наименование" name="name" bsSize="lg" onChange={this.handleName} value={item.name} required />
                 <ValueTypeField onChange={this.handleType} value={item.type} required />
                 <AvField label="Плагин" name="name" bsSize="lg" onChange={this.handlePlugin} value={item.plugin} required />
