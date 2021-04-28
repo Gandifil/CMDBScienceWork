@@ -21,7 +21,7 @@ export class MetricRow extends Component {
     }
 
     deleteMetric() {
-        fetch('api/metric/' + this.props.item.id, { method: "DELETE" })
+        fetch('api/metrics/' + this.props.item.id, { method: "DELETE" })
             .then(responce => responce.ok ? responce : Promise.reject(responce))
             .then(response => this.setState({ deleted: true }))
             .catch(e => console.log(e))
