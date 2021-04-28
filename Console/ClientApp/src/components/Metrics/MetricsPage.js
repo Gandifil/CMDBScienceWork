@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import ReactLoading from 'react-loading';
-import { Button } from 'reactstrap';
 import { MetricsTable } from './MetricsTable';
 import { AddButton } from '../AddButton';
+import { Loading } from '../Loading';
 //import { EditMetricModal } from './EditMetricModal';
 
 export class MetricsPage extends Component {
@@ -23,7 +22,7 @@ export class MetricsPage extends Component {
 
     render() {
         const contents = this.state.loading
-            ? <ReactLoading type="cylon" color="black" height={667} width={375} />
+            ? <Loading />
             : <MetricsTable items={this.state.items} />;//<EditMetricModal ref={this.createModal} onAccept={this.handleCreateAccept} />
 
         return (

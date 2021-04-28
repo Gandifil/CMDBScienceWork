@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactLoading from 'react-loading';
+import { Loading } from '../Loading';
 import { Button } from 'reactstrap';
 import { AttributesTable } from './AttributesTable';
 import { EditAttributeModal } from './EditAttributeModal';
@@ -23,7 +23,7 @@ export class AttributesPage extends Component {
 
     render() {
         const contents = this.state.loading
-            ? <ReactLoading type="cylon" color="black" height={667} width={375} />
+            ? <Loading />
             : <AttributesTable items={this.state.items} />;
 
         return (
