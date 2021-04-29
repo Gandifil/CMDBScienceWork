@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router';
+import { Route, Switch   } from 'react-router';
 import { Layout } from './components/Layout';
 import { Home } from './components/Home';
-import { EquipmentSearch } from './components/EquipmentSearch';
+import { EquipmentSearch } from './components/Elements/Equipments/EquipmentSearch';
 import { AttributesPage } from './components/Attributes/AttributesPage';
 import { MetricsPage } from './components/Metrics/MetricsPage';
 import { MetricPage } from './components/Metrics/MetricPage';
@@ -16,11 +16,13 @@ export default class App extends Component {
     return (
         <Layout>
             <Route exact path='/' component={Home} />
-            <Route exact path='/equipment-search' component={EquipmentSearch} />
             <Route exact path='/attributes' component={AttributesPage} />
             <Route exact path='/metrics' component={MetricsPage} />
             <Route exact path="/metrics/:id" component={MetricPage} />
-            <Route exact path="/equipments/:id" component={EquipmentPage} />
+            <Switch>
+                <Route exact path='/equipments/search' component={EquipmentSearch} />
+                <Route exact path="/equipments/:id" component={EquipmentPage} />
+            </Switch>
         </Layout>
     );
   }
