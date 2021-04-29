@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Loading } from '../Loading';
-import { Button } from 'reactstrap';
-import { AttributesTable } from './AttributesTable';
-import { EditAttributeModal } from './EditAttributeModal';
+import { AttributeRow } from './AttributeRow';
+import { ModalHeader } from 'reactstrap';
+import { ItemsTable } from '../ItemsTable';
 import { AddButton } from '../AddButton';
+import { EditAttributeModal } from './EditAttributeModal';
 
 export class AttributesPage extends Component {
     constructor(props) {
@@ -22,17 +23,17 @@ export class AttributesPage extends Component {
     }
 
     render() {
-        const contents = this.state.loading
-            ? <Loading />
-            : <AttributesTable items={this.state.items} />;
-
+        const headers = ["Название", "Тип", "Действия"]
         return (
             <div>
-                <AddButton name="Добавить атрибут" onClick={this.handleCreateClick}/>
+                <ModalHeader>Список атрибутов</ModalHeader>
+                <AddButton name="Добавить атрибут" onClick={this.handleCreateClick} />
                 <EditAttributeModal ref={this.createModal} onAccept={this.handleCreateAccept} />
-                {contents}
+                <Loading visible={this.state.loading}>
+                    <ItemsTable headers={headers} items={this.state.items} render={(x) => <AttributeRow item={x} />} />
+                </Loading>
             </div>
-            );
+        )
     }
 
     async populateData() {

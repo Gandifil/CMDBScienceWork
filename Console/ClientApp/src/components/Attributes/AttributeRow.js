@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { Button } from 'reactstrap';
 import { EditAttributeModal } from './EditAttributeModal';
 import { AcceptModal } from '../AcceptModal';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
+import { handleErrors } from '../HandleErrors';
+
 
 export class AttributeRow extends Component {
     constructor(props) {
@@ -21,9 +24,10 @@ export class AttributeRow extends Component {
     }
 
     deleteAttribute() {
-        fetch('api/attribute/' + this.props.item.id, { method: "DELETE" })
+        fetch('api/attributes/' + this.props.item.id, { method: "DELETE" })
+            .then(handleErrors)
             .then(response => this.setState({ deleted: true }))
-            .catch(e => console.log(e))
+            .catch(e => NotificationManager.error("", "Ошибка при удалении атрибута", 5000))
     }
 
     render() {
