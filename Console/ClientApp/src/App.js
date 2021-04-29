@@ -8,6 +8,7 @@ import { MetricsPage } from './components/Metrics/MetricsPage';
 import { MetricPage } from './components/Metrics/MetricPage';
 import './custom.css'
 import { EquipmentPage } from './components/Elements/Equipments/EquipmentPage';
+import { EquipmentList } from './components/Elements/Equipments/EquipmentList';
 
 export default class App extends Component {
   static displayName = App.name;
@@ -21,6 +22,7 @@ export default class App extends Component {
             <Route exact path="/metrics/:id" component={MetricPage} />
             <Switch>
                 <Route exact path='/equipments/search' component={EquipmentSearch} />
+                <Route exact path="/equipments/list" component={EquipmentList} />
                 <Route exact path="/equipments/:id" component={EquipmentPage} />
             </Switch>
         </Layout>

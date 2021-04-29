@@ -29,7 +29,7 @@ namespace Console.Controllers
                 serialNumber = "";
 
             return (from e in context.Equipments
-                    where e.Hostname.Contains(hostName) && e.Hostname.Contains(serialNumber)
+                    where e.HostName.Contains(hostName) && e.SerialNumber.Contains(serialNumber)
                     select e).Take(10);
         }
 

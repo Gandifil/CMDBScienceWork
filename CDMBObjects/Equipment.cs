@@ -9,7 +9,7 @@ namespace CDMBObjects
         [Key]
         public int Id { get; set; }
 
-        public string Hostname { get; set; }
+        public string HostName { get; set; }
 
         public string SerialNumber { get; set; }
 

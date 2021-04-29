@@ -59,7 +59,7 @@ namespace FillTable
                         var name = prefix + "icmdb" + postfix;
                         var item = new Equipment
                         {
-                            Hostname = name,
+                            HostName = name,
                             //Parameters = types.Select(x => new ParameterLink()
                             //{
                             //    Type = x,

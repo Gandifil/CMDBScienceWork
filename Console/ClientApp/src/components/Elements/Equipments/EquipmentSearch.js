@@ -1,6 +1,6 @@
 ﻿import React, { Component, useState } from 'react';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
-import { Button, ModalHeader } from 'reactstrap';
+import { ModalHeader } from 'reactstrap';
 import { Link } from "react-router-dom";
 
 export function EquipmentSearch(props) {
