@@ -7,6 +7,7 @@ import { AttributesPage } from './components/Attributes/AttributesPage';
 import { MetricsPage } from './components/Metrics/MetricsPage';
 import { MetricPage } from './components/Metrics/MetricPage';
 import './custom.css'
+import { EquipmentPage } from './components/Elements/Equipments/EquipmentPage';
 
 export default class App extends Component {
   static displayName = App.name;
@@ -15,10 +16,11 @@ export default class App extends Component {
     return (
         <Layout>
             <Route exact path='/' component={Home} />
-            <Route path='/equipment-search' component={EquipmentSearch} />
-            <Route path='/attributes' component={AttributesPage} />
+            <Route exact path='/equipment-search' component={EquipmentSearch} />
+            <Route exact path='/attributes' component={AttributesPage} />
             <Route exact path='/metrics' component={MetricsPage} />
             <Route exact path="/metrics/:id" component={MetricPage} />
+            <Route exact path="/equipments/:id" component={EquipmentPage} />
         </Layout>
     );
   }
