@@ -6,7 +6,8 @@ export function ValueTypeField(props) {
     const typeNames = ["Строка", "Проценты", "Вещественное", "Целое"]
 
     return (
-        <AvField label="Тип значения" name="selectType" bsSize="lg" type="select" onChange={props.onChange} value={props.value} required>
+        <AvField label="Тип значения" name="selectType" bsSize="lg" style={{ backgroundColor: "#fff" }} type="select"
+            disabled={props.readOnly} onChange={props.onChange} value={props.value} required>
             {typeNames.map(renderTag)}
         </AvField>
     );

@@ -2,19 +2,32 @@ import React, { Component } from 'react';
 import ReactLoading from 'react-loading';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { ValueTypeField } from '../ValueTypeField';
+import { ToggleEditButton } from '../ToggleEditButton';
 import { Button, Label, ModalHeader} from 'reactstrap';
 //import { EditMetricModal } from './EditMetricModal';
 
-export class MetricPage extends Component {
+class MetricForm extends Component {
     constructor(props) {
         super(props);
-        this.state = { item: null, loading: true };
+        this.state = { item: this.props.item };
+
+        this.formEl = React.createRef()
 
         this.handleName = this.setName.bind(this)
         this.handleType = this.setType.bind(this)
         this.handlePlugin = this.setPlugin.bind(this)
         this.handleCron = this.setCron.bind(this)
         this.handleHistory = this.setHistory.bind(this)
+    }
+
+    hasError() {
+        const form = this.formEl.current._inputs;
+        return (
+            form.name.context.FormCtrl.hasError() ||
+            form.plugin.context.FormCtrl.hasError() ||
+            form.cron.context.FormCtrl.hasError() ||
+            form.history.context.FormCtrl.hasError()
+            )
     }
 
     setName(e) {
@@ -42,29 +55,65 @@ export class MetricPage extends Component {
         this.setState(this.state)
     }
 
+    render() {
+        const item = this.state.item;
+        return (
+            <AvForm ref={this.formEl}>
+                <AvField label="Наименование" name="name" bsSize="lg" style={{ backgroundColor: "#fff" }} readOnly={!this.props.editing}
+                    onChange={this.handleName} value={item.name} required />
+                <ValueTypeField readOnly={!this.props.editing}
+                    onChange={this.handleType} value={item.type} required />
+                <AvField label="Плагин" name="plugin" bsSize="lg" style={{ backgroundColor: "#fff" }} readOnly={!this.props.editing} onChange={this.handlePlugin}
+                    value={item.plugin} required />
+                <AvField label="Cron-расписание" name="cron" bsSize="lg" style={{ backgroundColor: "#fff" }} readOnly={!this.props.editing}
+                    onChange={this.handleCron} value={item.cron} required />
+                <AvField
+                    label="История храниться в течении (д.)"
+                    name="history" bsSize="lg"
+                    style={{ backgroundColor: "#fff" }}
+                    readOnly={!this.props.editing}
+                    onChange={this.handleHistory} value={item.historyDays}
+                    type="number" min="1" max="30" required />
+            </AvForm >
+        )
+    }
+}
+
+export class MetricPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { item: null, loading: true };
+
+        this.formEl = React.createRef()
+
+        this.toggleEdit = React.createRef()
+        this.handleSave = this.save.bind(this)
+        this.handleRender = (state) => (<MetricForm ref={this.formEl} item={this.state.item} editing={ state.editing } />)
+        }
+
+    save() {
+        if (this.formEl.current.hasError())
+            return
+
+        const id = this.props.match.params.id;
+        fetch('api/metrics/' + id)
+            .then(responce => responce.ok ? responce.json() : Promise.reject(responce))
+            .then(result => this.setState({ item: result, loading: false }))
+            .catch(e => console.log(e))
+    }
+
     componentDidMount() {
         this.populateData();
     }
-
-    renderMetric() {
-        const item = this.state.item;
-        return (
-            <AvForm>
-                <ModalHeader>Метрика</ModalHeader>
-                <AvField label="Наименование" name="name" bsSize="lg" onChange={this.handleName} value={item.name} required />
-                <ValueTypeField onChange={this.handleType} value={item.type} required />
-                <AvField label="Плагин" name="name" bsSize="lg" onChange={this.handlePlugin} value={item.plugin} required />
-                <AvField label="Cron-расписание" name="name" bsSize="lg" onChange={this.handleCron} value={item.cron} required />
-                <AvField label="История храниться в течении (д.)" name="maxPropString" bsSize="lg" onChange={this.handleHistory} value={item.historyDays} type="number" min="1" max="30" required />
-            </AvForm >
-        )
-    } 
 
     render() {
         if (this.state.loading)
             return (<ReactLoading type="cylon" color="black" height={667} width={375} />)
         else
-            return this.renderMetric();
+            return (<div>
+                <ModalHeader>Метрика</ModalHeader>
+                <ToggleEditButton onSave={this.handleSave} render={this.handleRender} />
+                </div>);
     }
 
     populateData() {
