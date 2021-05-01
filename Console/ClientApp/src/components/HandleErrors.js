@@ -1,6 +1,6 @@
 ﻿export function handleErrors(response) {
-    if (!response.ok) {
-        throw Error(response);
-    }
-    return response.json();
+    console.log(response)
+    if (response.ok) 
+        return response.json()
+    else throw new Error(response.statusText);
 }

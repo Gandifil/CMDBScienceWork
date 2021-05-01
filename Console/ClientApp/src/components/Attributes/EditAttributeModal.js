@@ -1,6 +1,8 @@
 ﻿import React, { Component } from 'react';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Label, Input, FormGroup } from 'reactstrap';
+import { NotificationManager } from 'react-notifications';
+import { handleErrors } from '../HandleErrors';
 
 export class EditAttributeModal extends Component {
     constructor(props) {
@@ -45,7 +47,7 @@ export class EditAttributeModal extends Component {
 
     fetchRequest() {
         if (this.state.item.id)
-            return fetch("api/attribute/" + this.state.item.id, {
+            return fetch("api/attributes/" + this.state.item.id, {
                 method: "PUT",
                 body: JSON.stringify(this.state.item),
                 headers: {
@@ -53,7 +55,7 @@ export class EditAttributeModal extends Component {
                 },
             })
         else
-            return fetch("api/attribute", {
+            return fetch("api/attributes", {
                 method: "POST",
                 body: JSON.stringify(this.state.item),
                 headers: {
@@ -67,9 +69,9 @@ export class EditAttributeModal extends Component {
             return;
         console.log("Сохранить", this.state.item);
         this.fetchRequest()
-            .then(responce => responce.ok ? responce : Promise.reject(responce))
+            .then(handleErrors)
             .then(responce => this.props.onAccept(this))
-            .catch(e => console.log(e))
+            .catch(e => NotificationManager.error("", "Ошибка при изменении/создании атрибута", 5000))
         this.hide();
     }
 
