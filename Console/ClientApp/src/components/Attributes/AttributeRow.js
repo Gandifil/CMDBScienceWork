@@ -27,7 +27,10 @@ export class AttributeRow extends Component {
         fetch('api/attributes/' + this.props.item.id, { method: "DELETE" })
             .then(handleErrors)
             .then(response => this.setState({ deleted: true }))
-            .catch(e => NotificationManager.error("", "Ошибка при удалении атрибута", 5000))
+            //.catch(e => {alert(e)})
+            .catch(e => {
+                NotificationManager.error(e.message, "Ошибка при удалении атрибута", 5000)
+            })
     }
 
     render() {
