@@ -13,6 +13,8 @@ namespace CDMBObjects
 
         public string SerialNumber { get; set; }
 
+        public List<AttributeValue> Attributes { get; set; } = new List<AttributeValue>();
+
         //public List<ParameterLink> Parameters { get; set; }
     }
 }

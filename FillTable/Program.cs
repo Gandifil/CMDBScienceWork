@@ -46,9 +46,9 @@ namespace FillTable
             {
                 db.Reload();
 
-                var types = CreateTypes();
-                db.Metrics.AddRange(types);
+                db.Metrics.AddRange(CreateTypes());
                 db.Attributes.AddRange(TestAttributes);
+                db.SaveChanges();
 
                 for (int i = 0; i < 3; i++)
                 {
@@ -60,11 +60,18 @@ namespace FillTable
                         var item = new Equipment
                         {
                             HostName = name,
+                            Attributes = new List<AttributeValue>(),
                             //Parameters = types.Select(x => new ParameterLink()
                             //{
                             //    Type = x,
                             //}).ToList(),
                         };
+                        item.Attributes.Add(new AttributeValue
+                        {
+                            Attribute = db.Attributes.First(),
+                            Value = "x",
+                            Equipment = item,
+                        });
                         db.Equipments.Add(item);
                     }
                 }

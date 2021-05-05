@@ -33,6 +33,22 @@ namespace Console.Controllers
                     select e).Take(10);
         }
 
+        [HttpGet("{id:int:min(0)}")]
+        public async Task<Equipment> Get([FromRoute] int id)
+        {
+            return await context.Equipments.FindAsync(id);
+        }
+
+        [HttpGet("{equipmentID:int:min(0)}/attributes")]
+        public async Task<IActionResult> GetAttrs([FromRoute] int equipmentID)
+        {
+            var results = from v in context.AttributeValues
+                          where v.Equipment.Id == equipmentID
+                          select new { v.ID, v.Attribute.Name, v.Attribute.Type, v.Value,  };
+            return Ok(results.ToList());
+        }
+
+
         [HttpPost]
         public IActionResult Post([FromBody] Equipment item)
         {
