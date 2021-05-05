@@ -3,7 +3,9 @@ import ReactLoading from 'react-loading';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { ValueTypeField } from '../ValueTypeField';
 import { ToggleEditButton } from '../ToggleEditButton';
-import { Button, Label, ModalHeader} from 'reactstrap';
+import { Button, Container, Label, ModalHeader} from 'reactstrap';
+import { MetricRow } from './MetricRow';
+import { EntitiesTable } from '../EntitiesTable';
 //import { EditMetricModal } from './EditMetricModal';
 
 class MetricForm extends Component {
@@ -79,50 +81,64 @@ class MetricForm extends Component {
     }
 }
 
-export class MetricPage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { item: null, loading: true };
+export function MetricPage(props) {
+    const renderItem = (data) =>
+        <MetricRow item={ data } />
 
-        this.formEl = React.createRef()
+    const id = props.match.params.id;
 
-        this.toggleEdit = React.createRef()
-        this.handleSave = this.save.bind(this)
-        this.handleRender = (state) => (<MetricForm ref={this.formEl} item={this.state.item} editing={ state.editing } />)
-        }
-
-    save() {
-        if (this.formEl.current.hasError())
-            return
-
-        const id = this.props.match.params.id;
-        fetch('api/metrics/' + id)
-            .then(responce => responce.ok ? responce.json() : Promise.reject(responce))
-            .then(result => this.setState({ item: result, loading: false }))
-            .catch(e => console.log(e))
-    }
-
-    componentDidMount() {
-        this.populateData();
-    }
-
-    render() {
-        if (this.state.loading)
-            return (<ReactLoading type="cylon" color="black" height={667} width={375} />)
-        else
-            return (<div>
-                <ModalHeader>Метрика</ModalHeader>
-                <ToggleEditButton onSave={this.handleSave} render={this.handleRender} />
-                </div>);
-    }
-
-    populateData() {
-        this.setState({ item: null, loading: true });
-
-        const id = this.props.match.params.id;
-        fetch('api/metrics/' + id)
-            .then(responce => responce.ok ? responce.json() : Promise.reject(responce))
-            .then(result => this.setState({ item: result, loading: false }))
-            .catch(e => console.log(e))
-    }
+    return (
+        <Container>
+            <ModalHeader>Список метрик</ModalHeader>
+            <EntitiesTable headers={["Имя", "Плагин", "Расписание", "Действия"]} renderItem={renderItem} resource={`/api/metrics/${id}`} />
+        </Container>
+    );
 }
+
+//export class MetricPage extends Component {
+//    constructor(props) {
+//        super(props);
+//        this.state = { item: null, loading: true };
+
+//        this.formEl = React.createRef()
+
+//        this.toggleEdit = React.createRef()
+//        this.handleSave = this.save.bind(this)
+//        this.handleRender = (state) => (<MetricForm ref={this.formEl} item={this.state.item} editing={ state.editing } />)
+//        }
+
+//    save() {
+//        if (this.formEl.current.hasError())
+//            return
+
+//        const id = this.props.match.params.id;
+//        fetch('api/metrics/' + id)
+//            .then(responce => responce.ok ? responce.json() : Promise.reject(responce))
+//            .then(result => this.setState({ item: result, loading: false }))
+//            .catch(e => console.log(e))
+//    }
+
+//    componentDidMount() {
+//        this.populateData();
+//    }
+
+//    render() {
+//        if (this.state.loading)
+//            return (<ReactLoading type="cylon" color="black" height={667} width={375} />)
+//        else
+//            return (<div>
+//                <ModalHeader>Метрика</ModalHeader>
+//                <ToggleEditButton onSave={this.handleSave} render={this.handleRender} />
+//                </div>);
+//    }
+
+//    populateData() {
+//        this.setState({ item: null, loading: true });
+
+//        const id = this.props.match.params.id;
+//        fetch('api/metrics/' + id)
+//            .then(responce => responce.ok ? responce.json() : Promise.reject(responce))
+//            .then(result => this.setState({ item: result, loading: false }))
+//            .catch(e => console.log(e))
+//    }
+//}

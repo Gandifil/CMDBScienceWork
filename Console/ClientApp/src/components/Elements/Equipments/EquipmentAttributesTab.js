@@ -11,5 +11,5 @@ export function EquipmentAttributesTab(props) {
             <td>{item.value}</td>
         </tr>
 
-    return <EntitiesTable title="Атрибуты" headers={["Имя", "Тип", "Значение"]} renderItem={renderItem} resource={`/api/equipments/${props.id}/attributes`} />
+    return <EntitiesTable headers={["Имя", "Тип", "Значение"]} renderItem={renderItem} resource={`/api/equipments/${props.id}/attributes`} />
 }

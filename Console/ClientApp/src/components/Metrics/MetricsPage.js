@@ -1,44 +1,17 @@
 import React, { Component } from 'react';
-import { MetricsTable } from './MetricsTable';
-import { AddButton } from '../AddButton';
-import { Loading } from '../Loading';
+import { Button, Container, Label, ModalHeader } from 'reactstrap';
+import { MetricRow } from './MetricRow';
+import { EntitiesTable } from '../EntitiesTable';
 //import { EditMetricModal } from './EditMetricModal';
 
-export class MetricsPage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { items: [], loading: false };
+export function MetricsPage(props) {
+    const renderItem = (data) =>
+        <MetricRow item={data} />
 
-        this.createModal = React.createRef()
-
-        this.handleCreateClick = (e) => this.createModal.current.show()
-
-        this.handleCreateAccept = (e) => this.populateData()
-    }
-
-    componentDidMount() {
-        this.populateData();
-    }
-
-    render() {
-        const contents = this.state.loading
-            ? <Loading />
-            : <MetricsTable items={this.state.items} />;//<EditMetricModal ref={this.createModal} onAccept={this.handleCreateAccept} />
-
-        return (
-            <div>
-                <AddButton name="Добавить метрику" onClick={this.handleCreateClick}/>
-                {contents}
-            </div>
-            );
-    }
-
-    populateData() {
-        this.setState({ items: [], loading: true });
-        
-        fetch('api/metrics')
-            .then(responce => responce.ok ? responce.json() : Promise.reject(responce))
-            .then(results => this.setState({ items: results, loading: false }))
-            .catch(e => console.log(e))
-    }
+    return (
+        <Container>
+            <ModalHeader>Список метрик</ModalHeader>
+            <EntitiesTable headers={["Имя", "Плагин", "Расписание", "Действия"]} renderItem={renderItem} resource={`/api/metrics`} />
+        </Container>
+    );
 }
