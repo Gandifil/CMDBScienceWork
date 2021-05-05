@@ -25,20 +25,33 @@ namespace FillTable
                 Type = CDMBObjects.Attribute.ValueType.String,
             },
         };
-
-        static IEnumerable<Metric> CreateTypes()
+        static IEnumerable<Metric> TestMetrics => new List<Metric>()
         {
-            var types = new List<Metric>();
-            types.Add(new Metric()
+            new Metric()
             {
                 Name = "Нагрузка на CPU",
                 Plugin = "CPU_LOAD",
                 Type = CDMBObjects.Attribute.ValueType.Percent,
                 Cron = "* */5 * * ? * *",
                 HistoryDays = 3,
-            }); 
-            return types;
-        }
+            },
+            new Metric()
+            {
+                Name = "Свободное место на ж.д",
+                Plugin = "FREE_HARDDISK_SIZE",
+                Type = CDMBObjects.Attribute.ValueType.Float,
+                Cron = "* * */2 * ? * *",
+                HistoryDays = 12,
+            },
+            new Metric()
+            {
+                Name = "Объем ж.д",
+                Plugin = "HARDDISK_SIZE",
+                Type = CDMBObjects.Attribute.ValueType.Float,
+                Cron = "* * */2 * ? * *",
+                HistoryDays = 12,
+            },
+        };
 
         static void Main(string[] args)
         {
@@ -46,7 +59,7 @@ namespace FillTable
             {
                 db.Reload();
 
-                db.Metrics.AddRange(CreateTypes());
+                db.Metrics.AddRange(TestMetrics);
                 db.Attributes.AddRange(TestAttributes);
                 db.SaveChanges();
 
