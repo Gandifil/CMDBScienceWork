@@ -23,7 +23,7 @@ export function EntitiesTable(props) {
     return (
         <Container>
             <AddButton name="Добавить" onClick={props.onAddClick} />
-            <LoadingData resource="/api/equipments/1/attributes" render={renderTable}/>
+            <LoadingData resource={props.resource} render={renderTable}/>
         </Container>
     );
 }
