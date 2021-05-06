@@ -3,7 +3,7 @@ import { Loading } from '../Loading';
 import { AttributeRow } from './AttributeRow';
 import { ModalHeader } from 'reactstrap';
 import { ItemsTable } from '../ItemsTable';
-import { AddButton } from '../AddButton';
+import { AddButton } from '../Buttons/AddButton';
 import { EditAttributeModal } from './EditAttributeModal';
 
 export class AttributesPage extends Component {

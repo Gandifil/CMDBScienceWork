@@ -9,7 +9,6 @@ export function AddButton(props) {
                 <path fill-rule="evenodd" d="M11 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0 1a5 5 0 1 0 0-10 5 5 0 0 0 0 10z" />
                 <path fill-rule="evenodd" d="M11 5a.5.5 0 0 1 .5.5v2h2a.5.5 0 0 1 0 1h-2v2a.5.5 0 0 1-1 0v-2h-2a.5.5 0 0 1 0-1h2v-2A.5.5 0 0 1 11 5z" />
             </svg>
-            {props.name}
         </Button>
     );
 }
