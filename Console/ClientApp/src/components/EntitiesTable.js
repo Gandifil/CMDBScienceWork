@@ -10,7 +10,7 @@ export function EntitiesTable(props) {
 
     return (
         <Container>
-            <AddButton name="Добавить" onClick={props.onAddClick} />
+            <AddButton name="Добавить" onClick={props.onAdd} />
             <LoadingData resource={props.resource} render={renderTable} />
         </Container>
     );

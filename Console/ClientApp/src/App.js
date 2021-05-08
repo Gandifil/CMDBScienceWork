@@ -9,6 +9,7 @@ import { MetricPage } from './components/Metrics/MetricPage';
 import './custom.css'
 import { EquipmentPage } from './components/Elements/Equipments/EquipmentPage';
 import { EquipmentList } from './components/Elements/Equipments/EquipmentList';
+import { NewMetricPage } from './components/Metrics/NewMetricPage';
 
 export default class App extends Component {
   static displayName = App.name;
@@ -18,8 +19,11 @@ export default class App extends Component {
         <Layout>
             <Route exact path='/' component={Home} />
             <Route exact path='/attributes' component={AttributesPage} />
-            <Route exact path='/metrics' component={MetricsPage} />
-            <Route exact path="/metrics/:id" component={MetricPage} />
+            <Switch>
+                <Route exact path='/metrics' component={MetricsPage} />
+                <Route exact path="/metrics/new" component={NewMetricPage} />
+                <Route exact path="/metrics/:id" component={MetricPage} />
+            </Switch>
             <Switch>
                 <Route exact path='/equipments/search' component={EquipmentSearch} />
                 <Route exact path="/equipments/list" component={EquipmentList} />
