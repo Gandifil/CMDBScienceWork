@@ -20,6 +20,8 @@ export function AttributeRow(props) {
             })
     }
 
+    const handleAccept = (item) => window.location.reload()
+
     const item = props.item;
     if (deleted)
         return (null);
@@ -30,15 +32,10 @@ export function AttributeRow(props) {
                 <td>{typeNames[item.type]}</td>
                 <td>
                     <OpenModalButton>
-                        <EditAttributeModal item={item} />
+                        <EditAttributeModal item={item} onAccept={handleAccept}/>
                     </OpenModalButton>
                     <DeleteButton items={["Удаление атрибута", "Удаление всех связанных с ним значений"]} onDelete={deleteAttribute} />
                 </td>
             </tr>
         );
 }
-
-//this.handleEditAccept = (e) => this.setState({ item: e.state.item, deleted: false })
-//<OpenModalButton>
-                    //    <EditAttributeModal item={item} />
-                    //</OpenModalButton>

@@ -70,8 +70,8 @@ export class EditAttributeModal extends Component {
         console.log("Сохранить", this.state.item);
         this.fetchRequest()
             .then(handleErrors)
-            .then(responce => this.props.onAccept(this))
-            .catch(e => NotificationManager.error("", "Ошибка при изменении/создании атрибута", 5000))
+            .then(responce => this.props.onAccept(this.state.item))
+            .catch(e => NotificationManager.error(e.message, "Ошибка при изменении/создании атрибута", 5000))
         this.hide();
     }
 

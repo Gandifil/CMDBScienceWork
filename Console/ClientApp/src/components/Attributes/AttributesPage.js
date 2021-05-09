@@ -1,22 +1,26 @@
-import React, { Component } from 'react';
-import { Loading } from '../Loading';
+import React, { Component, useRef } from 'react';
 import { AttributeRow } from './AttributeRow';
 import { Container, ModalHeader } from 'reactstrap';
-import { ItemsTable } from '../ItemsTable';
-import { AddButton } from '../Buttons/AddButton';
 import { EditAttributeModal } from './EditAttributeModal';
 import { EntitiesTable } from '../EntitiesTable';
 
 export function AttributesPage(props) {
     const headers = ["Название", "Тип", "Действия"]
 
+    const modal = useRef()
+
     const renderItem = (data) =>
         <AttributeRow item={data} />
+
+    const handleAdd = (e) => modal.current.show()
+
+    const handleAccept = (e) => window.location.reload()
 
     return (
         <Container>
             <ModalHeader>Список атрибутов</ModalHeader>
-            <EntitiesTable headers={headers} renderItem={renderItem} resource={`/api/attributes`} />
+            <EditAttributeModal ref={modal} onAccept={handleAccept} />
+            <EntitiesTable headers={headers} renderItem={renderItem} resource={`/api/attributes`} onAdd={handleAdd}/>
         </Container>
     );
 }
@@ -38,7 +42,7 @@ export function AttributesPage(props) {
 //            <div>
 //                <ModalHeader>Список атрибутов</ModalHeader>
 //                <AddButton name="Добавить атрибут" onClick={this.handleCreateClick} />
-//                <EditAttributeModal ref={this.createModal} onAccept={this.handleCreateAccept} />
+//                
 //                <Loading visible={this.state.loading}>
 //                    <ItemsTable headers={headers} items={this.state.items} render={(x) => <AttributeRow item={x} />} />
 //                </Loading>
