@@ -37,7 +37,7 @@ namespace Console.Controllers
             context.Metrics.Add(metric);
             var changes = await context.SaveChangesAsync();
             if (changes > 0)
-                return Ok();
+                return Ok(metric.ID);
             else return NotFound();
         }
 

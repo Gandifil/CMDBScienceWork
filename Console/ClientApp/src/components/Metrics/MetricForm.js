@@ -26,7 +26,7 @@ export function MetricForm(props) {
 
             <ValueTypeField
                 readOnly={readOnly}
-                onChange={e => setType(e.currentTarget.value)}
+                onChange={setType}
                 value={type}
                 required />
 
