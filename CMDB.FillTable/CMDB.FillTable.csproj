@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CDMBObjects\CDMBObjects.csproj" />
+    <ProjectReference Include="..\CDMB.Common\CDMB.Common.csproj" />
   </ItemGroup>
 
 </Project>

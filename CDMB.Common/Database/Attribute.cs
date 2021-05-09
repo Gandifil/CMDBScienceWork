@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CDMBObjects
+namespace CDMB.Common.Database
 {
     /// <summary>
     /// Описывает именованное значение (какого-либо типа), которое можно привязать к оборудованию.

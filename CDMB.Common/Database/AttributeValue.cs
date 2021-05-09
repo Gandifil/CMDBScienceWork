@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CDMBObjects
+namespace CDMB.Common.Database
 {
     public class AttributeValue
     {

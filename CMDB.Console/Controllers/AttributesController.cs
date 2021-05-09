@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CDMBObjects;
+using CDMB.Common.Database;
 using Microsoft.AspNetCore.Mvc;
+using Attribute = CDMB.Common.Database.Attribute;
 
-namespace Console.Controllers
+namespace CMDB.Console.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -18,12 +19,12 @@ namespace Console.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<CDMBObjects.Attribute> Get()
+        public IEnumerable<Attribute> Get()
         {
            return context.Attributes;
         }
 
-        public async Task<IActionResult> Post([FromBody] CDMBObjects.Attribute attribute)
+        public async Task<IActionResult> Post([FromBody] Attribute attribute)
         {
             context.Attributes.Add(attribute);
             var changes = await context.SaveChangesAsync();
@@ -33,7 +34,7 @@ namespace Console.Controllers
         }
 
         [HttpPut("{id:int:min(0)}")]
-        public async Task<IActionResult> Put(int id, [FromBody] CDMBObjects.Attribute attribute)
+        public async Task<IActionResult> Put(int id, [FromBody] Attribute attribute)
         {
             attribute.ID = id;
             context.Update(attribute);
@@ -46,7 +47,7 @@ namespace Console.Controllers
         [HttpDelete("{id:int:min(0)}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var attr = new CDMBObjects.Attribute
+            var attr = new Attribute
             {
                 ID = id,
             };

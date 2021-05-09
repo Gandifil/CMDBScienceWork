@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace CDMBObjects
+namespace CDMB.Common.Database
 {
     public class ApplicationContext : DbContext
     {

@@ -1,28 +1,29 @@
-﻿using CDMBObjects;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CDMB.Common.Database;
+using Attribute = CDMB.Common.Database.Attribute;
 
-namespace FillTable
+namespace CMDB.FillTable
 {
     class Program
     {
-        static IEnumerable<CDMBObjects.Attribute> TestAttributes => new List<CDMBObjects.Attribute>()
+        static IEnumerable<Attribute> TestAttributes => new List<Attribute>()
         {
-            new CDMBObjects.Attribute
+            new Attribute
             {
                 Name = "Процессор",
-                Type = CDMBObjects.Attribute.ValueType.String,
+                Type = Attribute.ValueType.String,
             },
-            new CDMBObjects.Attribute
+            new Attribute
             {
                 Name = "Стоимость",
-                Type = CDMBObjects.Attribute.ValueType.Integer,
+                Type = Attribute.ValueType.Integer,
             },
-            new CDMBObjects.Attribute
+            new Attribute
             {
                 Name = "Операционная система",
-                Type = CDMBObjects.Attribute.ValueType.String,
+                Type = Attribute.ValueType.String,
             },
         };
         static IEnumerable<Metric> TestMetrics => new List<Metric>()
@@ -31,7 +32,7 @@ namespace FillTable
             {
                 Name = "Нагрузка на CPU",
                 Plugin = "CPU_LOAD",
-                Type = CDMBObjects.Attribute.ValueType.Percent,
+                Type = Attribute.ValueType.Percent,
                 Cron = "* */5 * * ? * *",
                 HistoryDays = 3,
             },
@@ -39,7 +40,7 @@ namespace FillTable
             {
                 Name = "Свободное место на ж.д",
                 Plugin = "FREE_HARDDISK_SIZE",
-                Type = CDMBObjects.Attribute.ValueType.Float,
+                Type = Attribute.ValueType.Float,
                 Cron = "* * */2 * ? * *",
                 HistoryDays = 12,
             },
@@ -47,7 +48,7 @@ namespace FillTable
             {
                 Name = "Объем ж.д",
                 Plugin = "HARDDISK_SIZE",
-                Type = CDMBObjects.Attribute.ValueType.Float,
+                Type = Attribute.ValueType.Float,
                 Cron = "* * */2 * ? * *",
                 HistoryDays = 12,
             },
