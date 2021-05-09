@@ -1,5 +1,5 @@
 ﻿import React, { Component } from 'react';
-import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
+import { Collapse, Container, DropdownItem, DropdownMenu, DropdownToggle, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, UncontrolledDropdown } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './NavMenu.css';
 
@@ -30,9 +30,16 @@ export class NavMenu extends Component {
                         <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
                         <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
                             <ul className="navbar-nav flex-grow">
-                                <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/equipments/search">Оборудование</NavLink>
-                                </NavItem>
+                                <UncontrolledDropdown nav inNavbar>
+                                    <DropdownToggle className="text-dark" nav caret>
+                                        Конфигурационные элементы
+                                    </DropdownToggle>
+                                    <DropdownMenu right>
+                                        <DropdownItem>
+                                            <NavLink tag={Link} className="text-dark" to="/equipments/search">Оборудование</NavLink>
+                                        </DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
                                 <NavItem>
                                     <NavLink tag={Link} className="text-dark" to="/attributes">Атрибуты</NavLink>
                                 </NavItem>
