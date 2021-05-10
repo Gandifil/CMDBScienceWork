@@ -1,3 +1,4 @@
+using CDMB.Common;
 using CDMB.Common.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,9 +22,8 @@ namespace CMDB.Console
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddCMDB();
             services.AddControllersWithViews();
-            services.AddDbContext<ApplicationContext>();
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
