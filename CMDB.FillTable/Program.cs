@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CDMB.Common.Database;
+using CDMB.Common.Equipments;
 using Attribute = CDMB.Common.Database.Attribute;
 
 namespace CMDB.FillTable
@@ -64,6 +65,8 @@ namespace CMDB.FillTable
                 db.Attributes.AddRange(TestAttributes);
                 db.SaveChanges();
 
+                var builder = new EquipmentBuilder(db);
+
                 for (int i = 0; i < 3; i++)
                 {
                     var prefix = i.ToString().PadLeft(4, '0');
@@ -71,22 +74,12 @@ namespace CMDB.FillTable
                     {
                         var postfix = l.ToString().PadLeft(4, '0');
                         var name = prefix + "icmdb" + postfix;
-                        var item = new Equipment
+                        var serialNumber = Guid.NewGuid().ToString();
+                        builder.CreateAsync(new MachineInfo
                         {
                             HostName = name,
-                            Attributes = new List<AttributeValue>(),
-                            //Parameters = types.Select(x => new ParameterLink()
-                            //{
-                            //    Type = x,
-                            //}).ToList(),
-                        };
-                        item.Attributes.Add(new AttributeValue
-                        {
-                            Attribute = db.Attributes.First(),
-                            Value = "x",
-                            Equipment = item,
-                        });
-                        db.Equipments.Add(item);
+                            SerialNumber = serialNumber,
+                        }).Wait();
                     }
                 }
 

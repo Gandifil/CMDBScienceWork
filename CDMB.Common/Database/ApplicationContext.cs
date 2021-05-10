@@ -8,6 +8,7 @@ namespace CDMB.Common.Database
         public DbSet<Metric> Metrics { get; set; }
         public DbSet<Attribute> Attributes { get; set; }
         public DbSet<AttributeValue> AttributeValues { get; set; }
+        public DbSet<Parameter> Parameters { get; set; }
 
         public ApplicationContext()
         {

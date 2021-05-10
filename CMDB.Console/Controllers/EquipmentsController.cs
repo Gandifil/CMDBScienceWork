@@ -48,6 +48,14 @@ namespace CMDB.Console.Controllers
             return Ok(results.ToList());
         }
 
+        [HttpGet("{equipmentID:int:min(0)}/parameters")]
+        public async Task<IActionResult> GetParameters([FromRoute] int equipmentID)
+        {
+            var results = from p in context.Parameters
+                          where p.Equipment.Id == equipmentID
+                          select new { p.ID, p.Metric.Name, p.Value, p.Succes, p.Log, p.UpdateTime};
+            return Ok(results.ToList());
+        }
 
         [HttpPost]
         public IActionResult Post([FromBody] Equipment item)

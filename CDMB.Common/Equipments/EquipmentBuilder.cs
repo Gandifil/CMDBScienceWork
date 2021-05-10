@@ -28,6 +28,13 @@ namespace CDMB.Common.Equipments
                     Value = "unknown"
                 });
 
+            foreach (var metric in context.Metrics)
+                item.Parameters.Add(new Parameter
+                {
+                    Metric = metric,
+                    Value = "unknown",
+                });
+
             await context.Equipments.AddAsync(item);
             if (await context.SaveChangesAsync() == 0)
                 throw new ApplicationException("Can't save new equipment");
