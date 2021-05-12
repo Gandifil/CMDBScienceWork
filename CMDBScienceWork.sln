@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CMDB.Console", "CMDB.Consol
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CMDB.Common.Tests", "CMDB.Common.Tests\CMDB.Common.Tests.csproj", "{EB1BAC0E-F01A-4E01-AE68-C2DEE088C9B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMDB.Cryptography", "CMDB.Cryptography\CMDB.Cryptography.csproj", "{E7475519-85D0-41A3-BD94-5961B44DFCA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CMDB.Cryptography", "CMDB.Cryptography\CMDB.Cryptography.csproj", "{E7475519-85D0-41A3-BD94-5961B44DFCA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMDB.ConfigurationGate", "CMDB.ConfigurationGate\CMDB.ConfigurationGate.csproj", "{F92FD6DF-EFEE-431D-B1A4-2FE91AC646B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CMDB.ConfigurationGate", "CMDB.ConfigurationGate\CMDB.ConfigurationGate.csproj", "{F92FD6DF-EFEE-431D-B1A4-2FE91AC646B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMDB.Client", "CMDB.Client\CMDB.Client.csproj", "{D2578150-972A-43C5-BB62-8DD85748C8D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{F92FD6DF-EFEE-431D-B1A4-2FE91AC646B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F92FD6DF-EFEE-431D-B1A4-2FE91AC646B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F92FD6DF-EFEE-431D-B1A4-2FE91AC646B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2578150-972A-43C5-BB62-8DD85748C8D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2578150-972A-43C5-BB62-8DD85748C8D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2578150-972A-43C5-BB62-8DD85748C8D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2578150-972A-43C5-BB62-8DD85748C8D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
