@@ -57,6 +57,20 @@ namespace CMDB.Console.Controllers
             return Ok(results.ToList());
         }
 
+        [HttpPost("{equipmentID:int:min(0)}/parameters/{metricId:int:min(0)}")]
+        public async Task<IActionResult> AddParameters([FromRoute] int equipmentID, [FromRoute] int metricId)
+        {
+            var param = new Parameter
+            {
+                Equipment = await context.Equipments.FindAsync(equipmentID),
+                Metric = await context.Metrics.FindAsync(metricId),
+            };
+            context.Parameters.Add(param);
+            if (await context.SaveChangesAsync() > 0)
+                return Ok();
+            else return NotFound();
+        }
+
         [HttpDelete("{equipmentID:int:min(0)}/parameters/{id:int:min(0)}")]
         public async Task<IActionResult> DeleteParameters([FromRoute] int equipmentID, [FromRoute] int id)
         {

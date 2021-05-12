@@ -5,17 +5,24 @@ import { EntitiesTable } from '../../EntitiesTable';
 import { handleErrors } from '../../HandleErrors';
 import { NotificationManager } from 'react-notifications';
 import { DeleteButton } from '../../Buttons/DeleteButton';
+import { LinkButton } from '../../Buttons/LinkButton';
 
 function EquipmentMetricsAddModal(props) {
     const typeNames = ["Строка", "Проценты", "Вещественное", "Целое"]
 
+    const handleAdd = (id) => {
+        fetch(`/api/equipments/${props.id}/parameters/${id}`, { method: "POST" })
+            .then(handleErrors)
+            .then(data => document.location.reload())
+            .catch(e => NotificationManager.error(e.message, "Ошибка при добавлении параметра", 5000))
+    }
 
     const renderItem = (item) =>
         <tr key={item.id}>
             <td>{item.name}</td>
             <td>{typeNames[item.type]}</td>
             <td>{item.cron}</td>
-            <td><AddButton onClick={(e) => props.onAdd(item.id)} /></td>
+            <td><AddButton onClick={handleAdd.bind(null, item.id)} /></td>
         </tr>
 
     return <EntitiesTable headers={["Имя", "Тип", "Расписание"]} renderItem={renderItem} resource={`/api/metrics`} />
@@ -43,7 +50,10 @@ function EquipmentMetricsRow(props) {
                 <td>{item.name}</td>
                 <td>{item.value}</td>
                 <td>{item.updateTime}</td>
-                <td><DeleteButton items={["Удаление параметра"]} onDelete={deleteParameter} /></td>
+                <td>
+                    <LinkButton to={`/parameters/`+item.id}/>
+                    <DeleteButton items={["Удаление параметра"]} onDelete={deleteParameter} />
+                </td>
             </tr>
         )
 }
@@ -61,9 +71,9 @@ export function EquipmentMetricsTab(props) {
     return (
         <Container>
             <Modal isOpen={modal} >
-                <ModalHeader>Добавление метрики</ModalHeader>
+                <ModalHeader>Добавление параметра</ModalHeader>
                 <ModalBody>
-                    <EquipmentMetricsAddModal />
+                    <EquipmentMetricsAddModal id={props.id}/>
                 </ModalBody>
                 <ModalFooter>
                     <Button color="secondary" onClick={handleCancel}>Отмена</Button>
