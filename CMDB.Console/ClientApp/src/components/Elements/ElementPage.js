@@ -17,9 +17,9 @@ export function ElementPage(props) {
                     
                     <Nav tabs vertical>
                         {props.items.map((x, i) => 
-                            <NavItem>
+                            <NavItem className="ng-white border-bottom box-shadow mb-3">
                                   <NavLink
-                                    className={classnames({ active: activeTab === i.toString() })}
+                                    className={classnames({ active: activeTab === i.toString(), 'text-dark': true })}
                                     onClick={() => { toggle(i.toString()); }}
                                   >
                                     {x.name}

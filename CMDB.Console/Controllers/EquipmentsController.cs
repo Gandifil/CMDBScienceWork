@@ -57,6 +57,19 @@ namespace CMDB.Console.Controllers
             return Ok(results.ToList());
         }
 
+        [HttpDelete("{equipmentID:int:min(0)}/parameters/{id:int:min(0)}")]
+        public async Task<IActionResult> DeleteParameters([FromRoute] int equipmentID, [FromRoute] int id)
+        {
+            var param = new Parameter
+            {
+                ID = id,
+            };
+            context.Parameters.Remove(param);
+            if (await context.SaveChangesAsync() > 0)
+                return Ok();
+            else return NotFound();
+        }
+
         [HttpPost]
         public IActionResult Post([FromBody] Equipment item)
         {

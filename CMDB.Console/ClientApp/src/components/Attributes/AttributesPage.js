@@ -3,6 +3,7 @@ import { AttributeRow } from './AttributeRow';
 import { Container, ModalHeader } from 'reactstrap';
 import { EditAttributeModal } from './EditAttributeModal';
 import { EntitiesTable } from '../EntitiesTable';
+import { AddButton } from '../Buttons/AddButton';
 
 export function AttributesPage(props) {
     const headers = ["Название", "Тип", "Действия"]
@@ -19,8 +20,9 @@ export function AttributesPage(props) {
     return (
         <Container>
             <ModalHeader>Список атрибутов</ModalHeader>
+            <AddButton onClick={handleAdd} />
             <EditAttributeModal ref={modal} onAccept={handleAccept} />
-            <EntitiesTable headers={headers} renderItem={renderItem} resource={`/api/attributes`} onAdd={handleAdd}/>
+            <EntitiesTable headers={headers} renderItem={renderItem} resource={`/api/attributes`}/>
         </Container>
     );
 }
