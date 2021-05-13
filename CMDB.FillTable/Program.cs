@@ -32,25 +32,25 @@ namespace CMDB.FillTable
             new Metric()
             {
                 Name = "Нагрузка на CPU",
-                Plugin = "CPU_LOAD",
+                Plugin = "CPULoad",
                 Type = Attribute.ValueType.Percent,
-                Cron = "* */5 * * ? * *",
+                Cron = "*/10 * * * * ?",
                 HistoryDays = 3,
             },
             new Metric()
             {
                 Name = "Свободное место на ж.д",
-                Plugin = "FREE_HARDDISK_SIZE",
+                Plugin = "FreeDiskSize",
                 Type = Attribute.ValueType.Float,
-                Cron = "* * */2 * ? * *",
+                Cron = "*/10 * * * * ?", 
                 HistoryDays = 12,
             },
             new Metric()
             {
                 Name = "Объем ж.д",
-                Plugin = "HARDDISK_SIZE",
+                Plugin = "DiskSize",
                 Type = Attribute.ValueType.Float,
-                Cron = "* * */2 * ? * *",
+                Cron = "*/10 * * * * ?",
                 HistoryDays = 12,
             },
         };

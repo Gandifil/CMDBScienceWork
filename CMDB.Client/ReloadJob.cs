@@ -2,11 +2,13 @@
 using Quartz;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Management;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using static CMDB.Client.TaskProcessor;
 
 namespace CMDB.Client
 {
@@ -38,31 +40,6 @@ namespace CMDB.Client
             return result;
         }
 
-        private async Task<string> GetToken()
-        {
-            var hostName = Environment.MachineName;
-            var serialNumber = ParseSerialNumber();
-
-            Console.WriteLine($"MachineName: {hostName}");
-            Console.WriteLine($"SerialNumber: {serialNumber}");
-
-            var json = JsonConvert.SerializeObject(new { hostName , serialNumber });
-            var data = new StringContent(json, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync("http://localhost:5000/api/client/token", data); 
-            response.EnsureSuccessStatusCode();
-            return response.Content.ReadAsStringAsync().Result;
-        }
-
-        private async Task<string> GetTasks(string token)
-        {
-            client.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue("Bearer", token);
-
-            HttpResponseMessage response = await client.GetAsync("http://localhost:5000/api/client/tasks");
-
-            response.EnsureSuccessStatusCode();
-            return response.Content.ReadAsStringAsync().Result;
-        }
 
         public async Task Execute(IJobExecutionContext context)
         {
@@ -70,9 +47,20 @@ namespace CMDB.Client
             // Call asynchronous network methods in a try/catch block to handle exceptions.
             try
             {
-                var token = await GetToken();
+                var hostName = Environment.MachineName;
+                var serialNumber = ParseSerialNumber();
 
-                Console.WriteLine($"Tasks: {await GetTasks(token)}");
+                Console.WriteLine($"MachineName: {hostName}");
+                Console.WriteLine($"SerialNumber: {serialNumber}");
+
+                var token = await APIRequests.GetToken(new { hostName, serialNumber });
+                Console.WriteLine($"Token: {token}");
+
+                var tasks = await APIRequests.GetTasks(token);
+                await TaskProcessor.Instance.Clear();
+                foreach (var task in tasks)
+                    await TaskProcessor.Instance.AddTask(task);
+                Console.WriteLine($"Tasks count: {tasks.Count()}");
             }
             catch (HttpRequestException e)
             {

@@ -8,7 +8,9 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Quartz" Version="3.3.2" />
+    <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="5.0.1" />
     <PackageReference Include="System.Management" Version="5.0.0" />
+    <PackageReference Include="Universe.CpuUsage" Version="2.2.497.598" />
   </ItemGroup>
 
 </Project>
