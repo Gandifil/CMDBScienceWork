@@ -10,12 +10,12 @@ namespace CMDB.Cryptography
     {
         public static string GenerateToken(int id)
         {
-            var claims = new List<Claim>
+            var claims = new Claim[]
                 {
                     new Claim("id", id.ToString()),
                 };
 
-            var now = DateTime.UtcNow;
+            var now = DateTime.Now;
             // создаем JWT-токен
             var jwt = new JwtSecurityToken(
                     issuer: AuthOptions.ISSUER,

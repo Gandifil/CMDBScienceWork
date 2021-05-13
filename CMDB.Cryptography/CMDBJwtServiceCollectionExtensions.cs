@@ -13,6 +13,7 @@ namespace CDMB.Cryptography
                     .AddJwtBearer(options =>
                     {
                         options.RequireHttpsMetadata = false;
+                        options.SaveToken = true;
                         options.TokenValidationParameters = new TokenValidationParameters
                         {
                             // укзывает, будет ли валидироваться издатель при валидации токена
@@ -34,6 +35,7 @@ namespace CDMB.Cryptography
                             ValidateIssuerSigningKey = true,
                         };
                     });
+            services.AddHttpContextAccessor();
             return services;
         }
 

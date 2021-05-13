@@ -19,25 +19,22 @@ namespace CMDB.ConfigurationGate.Controllers
         private readonly ApplicationContext context;
         private readonly IEquipmentBuilder builder;
 
-        public TasksController(ApplicationContext context, IEquipmentBuilder builder, IHttpContextAccessor httpContext)
+        public TasksController(ApplicationContext context, IEquipmentBuilder builder)
         {
             this.context = context;
             this.builder = builder;
         }
 
         [HttpGet]
-        public async Task<string> Get()
+        [Authorize]
+        public async Task<IActionResult> Get()
         {
             var clientID = Convert.ToInt32(User.Claims.First().Value);
-            var equipment = await context.Equipments.FindAsync(clientID);
+            var founded = from p in context.Parameters
+                          where p.Equipment.Id == clientID
+                          select new {p.Metric.Plugin, p.Metric.Cron};
 
-            var founded = from e in context.Equipments
-                          where e.Id == clientID
-                          select e;
-
-            var id = founded.Any() ? founded.First().Id : (await builder.CreateAsync(info)).Id;
-
-            return AuthProvider.GenerateToken(id);
+            return Ok(founded.ToList());
         }
     }
 }
